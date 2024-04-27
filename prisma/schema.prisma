@@ -1,66 +1,100 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
 
 generator client {
   provider = "prisma-client-js"
 }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String  @map("user_id")
-  type               String
-  provider           String
-  providerAccountId  String  @map("provider_account_id")
-  refresh_token      String? @db.Text
-  access_token       String? @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String? @db.Text
-  session_state      String?
- 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@unique([provider, providerAccountId])
-  @@map("accounts")
-}
- 
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique @map("session_token")
-  userId       String   @map("user_id")
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
-  @@map("sessions")
-}
- 
 model User {
-  id            String    @id @default(cuid())
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
   email         String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
- 
-  @@map("users")
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+  Listing      Listing[]
+  Reservations Reservations[]
 }
- 
+
+model Account {
+  id                String  @id @default(auto()) @map("_id") @db.ObjectId
+  userId            String  @db.ObjectId
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.String
+  access_token      String? @db.String
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.String
+  session_state     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String   @unique
+  userId       String   @db.ObjectId
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model VerificationToken {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
-  @@map("verificationtokens")
+}
+
+// Optional for WebAuthn support
+
+model Listing {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  title         String
+  description   String
+  images        String[]
+  createdAt     DateTime       @default(now())
+  category      String
+  roomCount     Int
+  bathroomCount Int
+  guestCount    Int
+  location      String
+  price         Int
+  userId        String         @map("user_id") @db.ObjectId
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Reservations  Reservations[]
+
+  @@map("listings")
+}
+
+model Reservations {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listingId  String   @db.ObjectId
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int
+  createdAt  DateTime @default(now())
+
+  @@map("reservations")
 }
