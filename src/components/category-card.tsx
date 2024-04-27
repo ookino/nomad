@@ -13,6 +13,10 @@ interface Props {
   selected: boolean;
 }
 
+type UpdateQuery<T extends Record<string, string>> = {
+  [K in keyof T]: string;
+};
+
 const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
   const router = useRouter();
   const params = useSearchParams();
@@ -23,7 +27,7 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
       currentQuery = queryString.parse(params.toString());
     }
 
-    const updateQuery: any = {
+    const updateQuery: UpdateQuery<{ [key: string]: string }> = {
       ...currentQuery,
       category: label,
     };

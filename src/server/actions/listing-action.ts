@@ -1,18 +1,14 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { CreateListingType } from "@/schema/listing-schema";
 import { FieldValues } from "react-hook-form";
 
 import { currentUser } from "@/lib/auth-helpers";
 import db from "@/lib/db";
 
 export async function createListing(data: FieldValues) {
-  console.log({ data });
   const user = await currentUser();
-  console.log("Ussserrr", user);
   if (!user) {
-    console.log("Session not found");
     redirect("/");
   }
   try {
