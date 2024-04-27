@@ -1,11 +1,11 @@
 "use client";
 
-import { useCallback } from "react";
+import React, { useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import queryString from "query-string";
 import { IconType } from "react-icons/lib";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 interface Props {
   icon: IconType;

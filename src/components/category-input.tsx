@@ -1,8 +1,9 @@
 "use client";
 
+import React from "react";
 import { IconType } from "react-icons/lib";
 
-import { cn } from "@/lib/utils";
+import { cn } from "../lib/utils";
 
 interface Props {
   icon: IconType;

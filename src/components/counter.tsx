@@ -1,4 +1,6 @@
-import { useCallback } from "react";
+"use client";
+
+import React, { useCallback } from "react";
 import { Minus, Plus } from "@phosphor-icons/react";
 
 interface CouterProps {
