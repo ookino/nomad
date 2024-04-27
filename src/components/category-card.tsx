@@ -2,13 +2,13 @@
 
 import React, { useCallback } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Icon } from "@phosphor-icons/react";
 import queryString from "query-string";
-import { IconType } from "react-icons/lib";
 
 import { cn } from "../lib/utils";
 
 interface Props {
-  icon: IconType;
+  icon: Icon;
   label: string;
   selected: boolean;
 }
@@ -55,6 +55,7 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
       onClick={processCLick}
     >
       <Icon
+        weight="duotone"
         className={cn(
           "h-8 w-8 text-muted-foreground hover:text-foreground",
           selected ? "text-foreground" : ""
