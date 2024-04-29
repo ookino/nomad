@@ -3,11 +3,11 @@
 import { redirect } from "next/navigation";
 import { FieldValues } from "react-hook-form";
 
-import { currentUser } from "@/lib/auth-helpers";
+import { getCurrentUser } from "@/lib/auth-helpers";
 import db from "@/lib/db";
 
 export async function createListing(data: FieldValues) {
-  const user = await currentUser();
+  const user = await getCurrentUser();
   if (!user) {
     redirect("/");
   }
@@ -35,5 +35,19 @@ export async function createListing(data: FieldValues) {
   } catch (error) {
     console.log(error);
     return { error: "Could not create listing" };
+  }
+}
+
+export async function getListings() {
+  try {
+    const listings = await db.listing.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return listings;
+  } catch (error: unknown) {
+    throw new Error("Something went wrong while getting listings");
   }
 }

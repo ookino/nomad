@@ -49,7 +49,7 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
   return (
     <div
       className={cn(
-        "flex cursor-pointer flex-col items-center justify-center gap-1 transition hover:text-foreground",
+        "flex w-full cursor-pointer flex-col items-center justify-center gap-1 text-nowrap transition hover:text-foreground",
         selected ? "text-foreground" : " text-muted-foreground"
       )}
       onClick={processCLick}
@@ -61,7 +61,7 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
           selected ? "text-foreground" : ""
         )}
       />
-      <span className="text-xs capitalize">{label}</span>
+      <span className="text-nowrap text-xs">{label}</span>
     </div>
   );
 };

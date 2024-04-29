@@ -8,6 +8,7 @@ import {
   House,
   Island,
   Lighthouse,
+  Mountains,
   Tent,
   Tree,
   Warehouse,
@@ -26,25 +27,30 @@ import { PiBedBold, PiLighthouse } from "react-icons/pi";
 
 export const CATEGORIES = [
   {
+    label: "Top of the world",
+    icon: Mountains,
+    description: "Top of the world",
+  },
+  {
     label: "Lighthouse",
     icon: Lighthouse,
     description:
       "Entire houses for rent, offering privacy and space for families or groups.",
   },
   {
-    label: "apartment",
+    label: "Apartment",
     icon: BuildingApartment,
     description:
       "Modern apartments in urban areas, perfect for solo travelers or couples.",
   },
   {
-    label: "villa",
+    label: "Villa",
     icon: Warehouse,
     description:
       "Luxurious villas with private pools and stunning views, ideal for a relaxing getaway.",
   },
   {
-    label: "cabin",
+    label: "Cabin",
     icon: Barn,
     description:
       "Cozy cabins nestled in the woods or mountains, providing a rustic retreat close to nature.",
@@ -56,37 +62,37 @@ export const CATEGORIES = [
       "Entire houses for rent, offering privacy and space for families or groups.",
   },
   {
-    label: "bed n breakfast",
+    label: "bed & breakfast",
     icon: Bed,
     description:
       "Charming bed and breakfast accommodations offering personalized service and homemade breakfast.",
   },
   {
-    label: "condo",
+    label: "Condo",
     icon: Building,
     description:
       "Comfortable condos with resort amenities such as pools, gyms, and spas, perfect for a leisurely stay.",
   },
   {
-    label: "tent",
+    label: "Tent",
     icon: Tent,
     description:
       "Camping tents and glamping sites for outdoor enthusiasts seeking an adventurous experience.",
   },
   {
-    label: "boat",
+    label: "Boat",
     icon: Boat,
     description:
       "Unique boat rentals for a memorable stay on the water, from houseboats to sailing yachts.",
   },
   {
-    label: "treehouse",
+    label: "Treehouse",
     icon: Tree,
     description:
       "Quirky treehouses perched amidst lush foliage, offering a one-of-a-kind stay for the young at heart.",
   },
   {
-    label: "castle",
+    label: "Castle",
     icon: CastleTurret,
     description:
       "Historic castles and palaces available for exclusive rental, allowing guests to live like royalty.",

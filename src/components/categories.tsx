@@ -21,7 +21,7 @@ const Categories: React.FC<Props> = () => {
   return (
     <div>
       <Container>
-        <div className="flex w-full items-center justify-between gap-4 overflow-x-scroll">
+        <div className="flex w-full items-center justify-between gap-6 overflow-x-scroll">
           {CATEGORIES.map((item) => {
             return (
               <CategoryCard

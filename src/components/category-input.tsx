@@ -1,12 +1,12 @@
 "use client";
 
 import React from "react";
-import { IconType } from "react-icons/lib";
+import { Icon } from "@phosphor-icons/react";
 
 import { cn } from "../lib/utils";
 
 interface Props {
-  icon: IconType;
+  icon: Icon;
   label: string;
   selected?: boolean;
   onClick: (value: string) => void;

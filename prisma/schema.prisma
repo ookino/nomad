@@ -15,11 +15,11 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-
+favouriteIds String[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
   Listing      Listing[]
-  Reservations Reservations[]
+  reservations Reservation[]
 }
 
 model Account {
@@ -80,12 +80,12 @@ model Listing {
   price         Int
   userId        String         @map("user_id") @db.ObjectId
   user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
-  Reservations  Reservations[]
+  reservations  Reservation[]
 
   @@map("listings")
 }
 
-model Reservations {
+model Reservation {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   userId     String   @db.ObjectId
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
