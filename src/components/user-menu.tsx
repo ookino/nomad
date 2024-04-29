@@ -1,11 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { List, UserCircle } from "@phosphor-icons/react";
 import { useSession } from "next-auth/react";
 
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -37,7 +39,11 @@ const UserMenu = () => {
           <DropdownMenuContent
             className="mr-2 w-[200px]  text-xs shadow-sm sm:mr-4 md:mr-10 xl:mr-20"
             sideOffset={8}
-          ></DropdownMenuContent>
+          >
+            <DropdownMenuItem>
+              <Link href={"/trips"}>Your Trips</Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
         </DropdownMenu>
       )}
     </div>

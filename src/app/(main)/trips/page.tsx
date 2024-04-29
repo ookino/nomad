@@ -25,3 +25,5 @@ const TripsPage = async () => {
     );
   }
 };
+
+export default TripsPage;
