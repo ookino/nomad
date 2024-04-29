@@ -16,6 +16,10 @@ export const getCurrentUser = async () => {
       },
     });
 
+    if (!user) {
+      throw new Error("Something went wrong - User not found");
+    }
+
     return user;
   } catch (error) {
     console.log("user error", error);

@@ -85,3 +85,22 @@
     height: 500px;
   }
 }
+
+.rdrMonth {
+  width: 100% !important;
+}
+
+.rdrCalendarWrapper {
+  font-size: 14px !important;
+  width: 100% !important;
+}
+
+/* .rdrEndEdge {
+  border-top-right-radius: 0.8em !important;
+  border-bottom-right-radius: 0.8em !important;
+}
+
+.rdrStartEdge {
+  border-top-left-radius: 0.8em !important;
+  border-bottom-left-radius: 0.8em !important;
+} */

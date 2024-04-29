@@ -51,3 +51,26 @@ export async function getListings() {
     throw new Error("Something went wrong while getting listings");
   }
 }
+
+export async function getListingById(listingId: string) {
+  try {
+    const listing = await db.listing.findUnique({
+      where: {
+        id: listingId,
+      },
+      include: {
+        user: true,
+      },
+    });
+
+    if (!listing) {
+      return null;
+    }
+
+    return listing;
+
+    // return { ...listing, createdAt: listing.createdAt.toISOString() };
+  } catch (error: unknown) {
+    throw new Error("Something went wrong while getting listings");
+  }
+}

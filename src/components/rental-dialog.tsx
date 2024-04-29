@@ -147,7 +147,7 @@ const RentalDialog: React.FC<Props> = () => {
           List your home
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[600px]">
+      <DialogContent className="z-[100] sm:max-w-[600px]">
         <DialogHeader className="border-b pb-4">
           <DialogTitle className="text-lg">List your Home</DialogTitle>
         </DialogHeader>

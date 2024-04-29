@@ -1,3 +1,4 @@
+import { describe } from "node:test";
 import {
   Barn,
   Bed,
@@ -9,6 +10,7 @@ import {
   Island,
   Lighthouse,
   Mountains,
+  SketchLogo,
   Tent,
   Tree,
   Warehouse,
@@ -42,6 +44,12 @@ export const CATEGORIES = [
     icon: BuildingApartment,
     description:
       "Modern apartments in urban areas, perfect for solo travelers or couples.",
+  },
+
+  {
+    label: " Luxury",
+    icon: SketchLogo,
+    description: "Luxury beyond your imagination",
   },
   {
     label: "Villa",
