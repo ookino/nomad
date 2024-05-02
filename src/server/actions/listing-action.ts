@@ -1,6 +1,8 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { Listing } from "@prisma/client";
 import { FieldValues } from "react-hook-form";
 
 import { getCurrentUser } from "@/lib/auth-helpers";
@@ -37,9 +39,91 @@ export async function createListing(data: FieldValues) {
   }
 }
 
-export async function getListings() {
+export interface IGetListingsPayload {
+  userId?: string;
+  guestCount?: number;
+  roomCount?: number;
+  bathroomCount?: number;
+  startDate?: string;
+  endDate?: string;
+  locationValue?: string;
+  category?: string;
+}
+export async function getListings(params: IGetListingsPayload) {
+  const {
+    userId,
+    guestCount,
+    roomCount,
+    bathroomCount,
+    startDate,
+    endDate,
+    locationValue,
+    category,
+  } = params;
+
+  /* eslint-disable @typescript-eslint/no-explicit-any */
+  const query: any = {};
+
+  if (userId) {
+    query.userId = userId;
+  }
+
+  if (category) {
+    query.category = category;
+  }
+
+  if (roomCount) {
+    query.roomCount = {
+      gte: +roomCount,
+    };
+  }
+
+  if (bathroomCount) {
+    query.bathroomCount = {
+      gte: +bathroomCount,
+    };
+  }
+
+  if (guestCount) {
+    query.guestCount = {
+      gte: +guestCount,
+    };
+  }
+
+  if (locationValue) {
+    query.location = locationValue;
+  }
+
+  if (startDate && endDate) {
+    query.NOT = {
+      reservations: {
+        some: {
+          OR: [
+            {
+              startDate: {
+                lte: startDate,
+              },
+              endDate: {
+                gte: endDate,
+              },
+            },
+            {
+              startDate: {
+                gte: startDate,
+              },
+              endDate: {
+                lte: endDate,
+              },
+            },
+          ],
+        },
+      },
+    };
+  }
+
   try {
     const listings = await db.listing.findMany({
+      where: query,
       orderBy: {
         createdAt: "desc",
       },
@@ -65,6 +149,31 @@ export async function getListingsByUserId(userId: string) {
     return listings;
   } catch (error: unknown) {
     throw new Error("Something went wrong while getting listings");
+  }
+}
+
+export async function deleteListing(listingId: string, path: string) {
+  try {
+    const currentUser = await getCurrentUser();
+    if (!currentUser) {
+      redirect("/");
+    }
+
+    if (!listingId || typeof listingId !== "string") {
+      throw new Error("Invalid Id");
+    }
+
+    await db.listing.deleteMany({
+      where: {
+        id: listingId,
+        userId: currentUser.id,
+      },
+    });
+
+    revalidatePath(path);
+    return { success: "Listing deleted" };
+  } catch (error) {
+    return { error: "Listing could not be deleted, try again later" };
   }
 }
 

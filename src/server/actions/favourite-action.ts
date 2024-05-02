@@ -43,11 +43,8 @@ export async function removeLike(listingId: string) {
     if (!listingId || typeof listingId !== "string") {
       throw new Error("Invalid listing");
     }
-
     let likedIds = [...(currentUser.favouriteIds || [])];
-
     likedIds = likedIds.filter((id) => id !== listingId);
-
     await db.user.update({
       where: {
         id: currentUser.id,
@@ -56,9 +53,26 @@ export async function removeLike(listingId: string) {
         favouriteIds: likedIds,
       },
     });
-
     return { success: "Listing removed to Favourite list" };
   } catch (error) {
     return { error: "Could not remove listing from favourite list" };
   }
+}
+
+export async function getFavouriteListing() {
+  const currentUser = await getCurrentUser();
+
+  if (!currentUser) {
+    redirect("/?login");
+  }
+
+  const favourites = await db.listing.findMany({
+    where: {
+      id: {
+        in: [...(currentUser.favouriteIds || [])],
+      },
+    },
+  });
+
+  return favourites;
 }

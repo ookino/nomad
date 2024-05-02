@@ -1,6 +1,5 @@
-import { LegacyRef, useCallback, useMemo, useRef } from "react";
-import ReactQuill from "react-quill";
-import QuillEditor from "react-quill";
+import { useMemo } from "react";
+import dynamic from "next/dynamic";
 
 import "react-quill/dist/quill.snow.css";
 
@@ -10,40 +9,10 @@ interface Props {
 }
 
 const TextEditor: React.FC<Props> = ({ onChange, value }) => {
-  const quill = useRef<ReactQuill | null | undefined>();
-
-  const imageHandler = useCallback(() => {
-    const input = document.createElement("input");
-    input.setAttribute("type", "file");
-    input.setAttribute("accept", "image/*");
-    input.click();
-
-    // When a file is selected
-    input.onchange = () => {
-      const file = input.files ? input.files[0] : null;
-      if (file) {
-        const reader = new FileReader();
-        // Continue with your logic
-
-        // Read the selected file as a data URL
-        reader.onload = () => {
-          const imageUrl = reader.result;
-          const quillEditor = quill?.current?.getEditor();
-
-          // Get the current selection range and insert the image at that index
-          const range = quillEditor && quillEditor.getSelection(true);
-          quillEditor?.insertEmbed(
-            range?.index as number,
-            "image",
-            imageUrl,
-            "user"
-          );
-        };
-
-        reader.readAsDataURL(file);
-      }
-    };
-  }, []);
+  const QuillEditor = useMemo(
+    () => dynamic(() => import("react-quill"), { ssr: false }),
+    []
+  );
 
   const modules = useMemo(
     () => ({
@@ -61,15 +30,13 @@ const TextEditor: React.FC<Props> = ({ onChange, value }) => {
           ["link"],
           ["clean"],
         ],
-        handlers: {
-          image: imageHandler,
-        },
+        handlers: {},
       },
       clipboard: {
         matchVisual: true,
       },
     }),
-    [imageHandler]
+    []
   );
 
   const formats = [
@@ -90,7 +57,6 @@ const TextEditor: React.FC<Props> = ({ onChange, value }) => {
   return (
     <div className="pb-16">
       <QuillEditor
-        ref={quill as LegacyRef<ReactQuill>}
         theme="snow"
         className="h-[300px]"
         value={value}

@@ -1,4 +1,3 @@
-import { describe } from "node:test";
 import {
   Barn,
   Bed,
@@ -6,7 +5,6 @@ import {
   Building,
   BuildingApartment,
   CastleTurret,
-  House,
   Island,
   Lighthouse,
   Mountains,
@@ -15,17 +13,6 @@ import {
   Tree,
   Warehouse,
 } from "@phosphor-icons/react";
-import { FaCity } from "react-icons/fa";
-import { FaTent, FaTents } from "react-icons/fa6";
-import { GiIsland, GiTreehouse } from "react-icons/gi";
-import {
-  MdApartment,
-  MdCabin,
-  MdCastle,
-  MdHouseboat,
-  MdOutlineVilla,
-} from "react-icons/md";
-import { PiBedBold, PiLighthouse } from "react-icons/pi";
 
 export const CATEGORIES = [
   {

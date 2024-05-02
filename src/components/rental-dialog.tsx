@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CATEGORIES } from "@/constants";
 import { createListing } from "@/server/actions/listing-action";
-import { CaretLeft } from "@phosphor-icons/react";
+import { CaretLeft, HourglassMedium, House } from "@phosphor-icons/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -80,7 +80,11 @@ const RentalDialog: React.FC<Props> = () => {
   const images = watch("images");
   const description = watch("description");
 
-  const Map = useMemo(() => dynamic(() => import("./map"), { ssr: false }), []);
+  const Map = useMemo(
+    () => dynamic(() => import("./map"), { ssr: false }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [location]
+  );
 
   const setCustomValue = (
     id: string,
@@ -131,7 +135,8 @@ const RentalDialog: React.FC<Props> = () => {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant={"ghost"} className=" gap-2 border text-xs" size={"lg"}>
+        <Button variant={"ghost"} className=" gap-2 border text-xs" size={"sm"}>
+          <House weight="fill" />
           List your home
         </Button>
       </DialogTrigger>

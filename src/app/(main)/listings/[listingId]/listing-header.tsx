@@ -1,13 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { getListingById } from "@/server/actions/listing-action";
-import { Listing, Reservation, User } from "@prisma/client";
+import { User } from "@prisma/client";
 
-import { getCurrentUser } from "@/lib/auth-helpers";
 import useCountries from "@/hooks/useCountries";
-import Container from "@/components/container";
-import EmptyState from "@/components/empty-state";
 import HeartButton from "@/components/heart-button";
 
 interface IListingHeaderProps {

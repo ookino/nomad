@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { Icon as IconType } from "@phosphor-icons/react";
 
 interface IListingCategoryProps {

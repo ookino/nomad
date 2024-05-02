@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useRouter } from "next/navigation";
-import { Empty, SmileyXEyes } from "@phosphor-icons/react";
+import { SmileyXEyes } from "@phosphor-icons/react";
 
 import Heading from "./heading";
 import { Button } from "./ui/button";
@@ -32,7 +32,7 @@ const EmptyState: React.FC<EmptyStateProps> = ({
           <Button
             className="border"
             variant={"secondary"}
-            onClick={() => router.push("/")}
+            onClick={() => router.replace("/")}
           >
             Reset
           </Button>

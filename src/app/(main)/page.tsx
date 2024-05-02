@@ -1,14 +1,20 @@
-import { getListings } from "@/server/actions/listing-action";
+import {
+  getListings,
+  IGetListingsPayload,
+} from "@/server/actions/listing-action";
 import { Listing } from "@prisma/client";
 
-import { auth } from "@/lib/auth";
 import { getCurrentUser } from "@/lib/auth-helpers";
 import Container from "@/components/container";
 import EmptyState from "@/components/empty-state";
 import ListingCard from "@/components/listing-card";
 
-export default async function Home() {
-  const listings = await getListings();
+interface IProps {
+  searchParams: IGetListingsPayload;
+}
+
+export default async function Home({ searchParams }: IProps) {
+  const listings = await getListings(searchParams);
   const user = await getCurrentUser();
 
   if (listings.length === 0) {
