@@ -10,8 +10,6 @@ interface Props {
 }
 
 const TextEditor: React.FC<Props> = ({ onChange, value }) => {
-  console.log({ value });
-
   const quill = useRef<ReactQuill | null | undefined>();
 
   const imageHandler = useCallback(() => {

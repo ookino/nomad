@@ -1,17 +1,11 @@
 "use client";
 
-import { create } from "domain";
 import React, { useMemo, useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CATEGORIES } from "@/constants";
-import {
-  CreateListingSchema,
-  CreateListingType,
-} from "@/schema/listing-schema";
 import { createListing } from "@/server/actions/listing-action";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { CaretLeft } from "@phosphor-icons/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
@@ -40,7 +34,6 @@ import CountrySelect, { CountrySelectValue } from "./country-select";
 import ImageUploader from "./image-uploader";
 import TextEditor from "./text-editor/text-editor";
 import { FormInput } from "./ui/custom-input";
-import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 
 interface Props {}
@@ -87,10 +80,7 @@ const RentalDialog: React.FC<Props> = () => {
   const images = watch("images");
   const description = watch("description");
 
-  const Map = useMemo(
-    () => dynamic(() => import("./map"), { ssr: false }),
-    [location]
-  );
+  const Map = useMemo(() => dynamic(() => import("./map"), { ssr: false }), []);
 
   const setCustomValue = (
     id: string,
@@ -118,14 +108,12 @@ const RentalDialog: React.FC<Props> = () => {
   }, [step]);
 
   const submit: SubmitHandler<FieldValues> = async (data) => {
-    console.log("Submit1", { data });
     if (step !== STEPS.PRICE) {
       next();
       return;
     }
-    console.log("Submit2", { data });
-    const { success, error, listing } = await createListing(data);
-    console.log("Submit Response", { success, error, listing });
+
+    const { success, error } = await createListing(data);
 
     if (success) {
       toast.success(success);

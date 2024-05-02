@@ -1,4 +1,3 @@
-import Categories from "@/components/categories";
 import Navbar from "@/components/navbar";
 
 export default async function MainLayout({
@@ -9,7 +8,6 @@ export default async function MainLayout({
   return (
     <div className="">
       <Navbar />
-
       <div className="pb-20 pt-28">{children}</div>
     </div>
   );

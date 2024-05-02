@@ -9,7 +9,7 @@ import {
 } from "react";
 import { useRouter } from "next/navigation";
 import { CATEGORIES } from "@/constants";
-import { createReservation } from "@/server/actions/reservation";
+import { createReservation } from "@/server/actions/reservation-action";
 import { Listing, Reservation, User } from "@prisma/client";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
 import { Range } from "react-date-range";
@@ -58,9 +58,6 @@ const ListingView: React.FC<IListingViewProps> = ({
 
   const handleCreateReservation = useCallback(async () => {
     startTransition(async () => {
-      if (!currentUser) {
-        toast.error("Login to make a reservation");
-      }
       const { success, error } = await createReservation({
         listingId: listing.id,
         totalPrice,
@@ -70,21 +67,14 @@ const ListingView: React.FC<IListingViewProps> = ({
       if (success) {
         toast.success(success);
         setDateRange(initialDateRange);
-        //redirect to trips
+        router.push("/trips");
         router.refresh();
       }
       if (error) {
         toast.error(error || "Error creating reservation");
       }
     });
-  }, [
-    currentUser,
-    dateRange.endDate,
-    dateRange.startDate,
-    router,
-    totalPrice,
-    listing.id,
-  ]);
+  }, [dateRange.endDate, dateRange.startDate, router, totalPrice, listing.id]);
 
   useEffect(() => {
     if (dateRange.startDate && dateRange.endDate) {

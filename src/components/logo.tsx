@@ -7,10 +7,11 @@ const Logo = () => {
   const router = useRouter();
   return (
     <Image
+      onClick={() => router.push("/")}
       alt="logo"
       width={100}
       height={100}
-      className="hidden w-28 md:block"
+      className="hidden w-32 md:block"
       src={"/images/logo-type.svg"}
     />
   );

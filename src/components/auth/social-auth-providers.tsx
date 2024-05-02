@@ -9,9 +9,7 @@ export function SocialAuthenticationProvider() {
   async function onClick(provider: "google" | "facebook" | "github") {
     try {
       await OauthLogin(provider);
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   }
   return (
     <div className="flex w-full items-center gap-4">

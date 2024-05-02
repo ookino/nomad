@@ -1,5 +1,5 @@
 import { getListingById } from "@/server/actions/listing-action";
-import { getReservations } from "@/server/actions/reservation";
+import { getReservations } from "@/server/actions/reservation-action";
 import { User } from "@prisma/client";
 
 import { getCurrentUser } from "@/lib/auth-helpers";

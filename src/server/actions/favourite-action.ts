@@ -30,7 +30,6 @@ export async function addLike(listingId: string) {
 
     return { success: "Listing added to Favourite list" };
   } catch (error) {
-    console.log(error);
     return { error: "Could not add listing to favourite list" };
   }
 }
@@ -60,7 +59,6 @@ export async function removeLike(listingId: string) {
 
     return { success: "Listing removed to Favourite list" };
   } catch (error) {
-    console.log(error);
     return { error: "Could not remove listing from favourite list" };
   }
 }

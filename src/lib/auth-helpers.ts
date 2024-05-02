@@ -21,7 +21,5 @@ export const getCurrentUser = async () => {
     }
 
     return user;
-  } catch (error) {
-    console.log("user error", error);
-  }
+  } catch (error) {}
 };

@@ -33,7 +33,6 @@ export async function createListing(data: FieldValues) {
     });
     return { success: "This is the success", listing };
   } catch (error) {
-    console.log(error);
     return { error: "Could not create listing" };
   }
 }
@@ -41,6 +40,23 @@ export async function createListing(data: FieldValues) {
 export async function getListings() {
   try {
     const listings = await db.listing.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+
+    return listings;
+  } catch (error: unknown) {
+    throw new Error("Something went wrong while getting listings");
+  }
+}
+
+export async function getListingsByUserId(userId: string) {
+  try {
+    const listings = await db.listing.findMany({
+      where: {
+        userId,
+      },
       orderBy: {
         createdAt: "desc",
       },

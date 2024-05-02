@@ -1,7 +1,9 @@
-import { getReservations } from "@/server/actions/reservation";
+import { getReservations } from "@/server/actions/reservation-action";
 
 import { getCurrentUser } from "@/lib/auth-helpers";
 import EmptyState from "@/components/empty-state";
+
+import TripsView from "./trips-view";
 
 const TripsPage = async () => {
   const currentUser = await getCurrentUser();
@@ -24,6 +26,8 @@ const TripsPage = async () => {
       </div>
     );
   }
+
+  return <TripsView reservations={reservations} currentUser={currentUser} />;
 };
 
 export default TripsPage;

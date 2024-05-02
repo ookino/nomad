@@ -25,7 +25,6 @@ export const {
         session.user.id = token.sub;
       }
 
-      console.log({ session });
       return session;
     },
   },

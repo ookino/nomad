@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Listing, Reservation, User } from "@prisma/client";
 import { format } from "date-fns";
 
+import { rgbDataURL } from "@/lib/utils";
 import useCountries from "@/hooks/useCountries";
 
 import HeartButton from "./heart-button";
@@ -75,7 +76,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
       <div className="flex w-full flex-col gap-0">
         <div className=" relative aspect-square w-full overflow-hidden rounded-lg">
           <Image
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
+            quality={75}
             fill
+            placeholder="blur"
+            blurDataURL={rgbDataURL(119, 119, 119)}
             alt="listing"
             src={data.images[0]}
             className=" h-full w-full object-cover transition group-hover:scale-110"
@@ -97,10 +103,18 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <div className=" font-normal text-muted-foreground">night</div>
           )}
         </div>
+
         {action && actionLabel && (
-          <Button disabled={disabled} onClick={handelCancel}>
-            {actionLabel}
-          </Button>
+          <div className="mt-4 w-full">
+            <Button
+              size={"sm"}
+              disabled={disabled}
+              onClick={handelCancel}
+              className="w-full"
+            >
+              {actionLabel}
+            </Button>
+          </div>
         )}
       </div>
     </div>
