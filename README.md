@@ -1,36 +1,60 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![NOMAD BNB Logo](https://res.cloudinary.com/dthxhulp6/image/upload/v1714687868/nomad-og-1800_copy_e2disu.png)
 
-## Getting Started
+## NOMAD BNB
 
-First, run the development server:
+Nomad BNB is a simple Airbnb clone built with Next.js, server actions, Prisma, and MongoDB.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**Features:**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- User authentication and authorization
+- Listing creation and management
+- Booking functionality
+- Search and filtering capabilities
+- User profiles and reviews
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+**Tech Stack:**
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Frontend:** Next.js
+- **Backend:** Next.js server actions
+- **Database:** MongoDB
+- **ORM:** Prisma
+- **Additional Dependencies:** (e.g., NextAuth.js for authentication, Shadcn UI & Tailwind CSS for styling)
 
-## Learn More
+**Getting Started:**
 
-To learn more about Next.js, take a look at the following resources:
+1. **Prerequisites:** Ensure you have Node.js and npm (or yarn) installed on your system.
+2. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/ookino/nomad.git
+   cd nomad-bnb
+   ```
+3. **Install Dependencies:**
+   ```bash
+   bun install # or npm  install
+   ```
+4. **Set Environment Variables:**
+   - Create a `.env.local` file in the root directory and add the following variables:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `DATABASE_URL`: Your MongoDB connection string
+- `AUTH_SECRET`: Secret key for authentication
+- `AUTH_RESEND_KEY`: Key for resending authentication emails
+- `AUTH_GOOGLE_ID`: Google OAuth client ID
+- `AUTH_GOOGLE_SECRET`: Google OAuth client secret
+  - Any additional environment variables required by your chosen dependencies
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+5. **Run the Development Server:**
+   ```bash
+   bun run dev # or npm run dev
+   ```
+   Open `http://localhost:3000` in your browser to access the application.
 
-## Deploy on Vercel
+**Further Development:**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Explore the codebase to understand the implementation of various features.
+- Refer to the documentation of Next.js, Prisma, and other dependencies for detailed information and usage guides.
+- Customize the application according to your specific requirements and design preferences.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+**Deployment:**
+
+- You can deploy Nomad BNB to various platforms like Vercel, Netlify, or Heroku.
+- Refer to the deployment documentation of your chosen platform for specific instructions.
