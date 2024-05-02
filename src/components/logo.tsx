@@ -11,7 +11,7 @@ const Logo = () => {
       alt="logo"
       width={100}
       height={100}
-      className="hidden w-32 md:block"
+      className="w-32 md:block"
       src={"/images/logo-type.svg"}
     />
   );

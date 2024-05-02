@@ -59,9 +59,9 @@ const Search = () => {
   return (
     <SearchDialog
       trigger={
-        <div className="">
-          <div className=" flex h-12 items-center rounded-lg border  text-xs font-medium">
-            <div className="flex h-9 items-center gap-3 rounded-lg px-4 text-xs md:px-4">
+        <div className="flex w-full items-center md:w-fit">
+          <div className=" flex h-12 w-full items-center justify-center rounded-lg border  text-xs font-medium">
+            <div className="flex h-9 items-center gap-3 text-nowrap rounded-lg px-4 text-xs md:px-4">
               <MapPinArea className="h-4 w-4" weight="bold" /> {location}
             </div>
             <div className="flex h-9 items-center gap-3 rounded-lg px-4 md:px-4">

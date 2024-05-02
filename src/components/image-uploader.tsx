@@ -48,7 +48,7 @@ function ImageUploader({ onChange, value }: Props) {
 
       <lr-config
         ctx-name="my-uploader"
-        pubkey="6fa58c210368c1da0581"
+        pubkey={process.env.UPLOADCARE_PUBLIC_KEY}
         imgOnly={true}
         maxLocalFileSizeBytes={10000000}
         multiple-max="4"

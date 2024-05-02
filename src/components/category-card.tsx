@@ -49,7 +49,7 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
   return (
     <div
       className={cn(
-        "flex w-full cursor-pointer flex-col items-center justify-center gap-1 text-nowrap transition hover:text-foreground",
+        "flex cursor-pointer flex-col items-center justify-center gap-1  transition hover:text-foreground",
         selected ? "text-foreground" : " text-muted-foreground"
       )}
       onClick={processCLick}
@@ -57,11 +57,11 @@ const CategoryCard: React.FC<Props> = ({ icon: Icon, label, selected }) => {
       <Icon
         weight="duotone"
         className={cn(
-          "h-8 w-8 text-muted-foreground hover:text-foreground",
+          "h-7 w-7 text-muted-foreground hover:text-foreground",
           selected ? "text-foreground" : ""
         )}
       />
-      <span className="text-nowrap text-xs">{label}</span>
+      <pre className="font-sans text-xs">{label}</pre>
     </div>
   );
 };

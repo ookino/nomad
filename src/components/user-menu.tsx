@@ -27,7 +27,7 @@ const UserMenu = () => {
   const router = useRouter();
 
   return (
-    <div className="flex gap-2">
+    <div className="flex  gap-2">
       {session.data && <RentalDialog />}
 
       {!session.data && <LoginDialog />}
