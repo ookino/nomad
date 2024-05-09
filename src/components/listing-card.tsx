@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { Listing, Reservation, User } from "@prisma/client";
 import { format } from "date-fns";
 
-import { rgbDataURL } from "@/lib/utils";
+import { formatToCurrency, rgbDataURL } from "@/lib/utils";
 import useCountries from "@/hooks/useCountries";
 
 import HeartButton from "./heart-button";
@@ -98,7 +98,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
           {reservationDate || data.category}
         </div>
         <div className="mt-2 flex items-center gap-1 text-sm">
-          <div className="font-medium">$ {price}</div>
+          <div className="font-medium">{formatToCurrency(price)}</div>
           {!reservation && (
             <div className=" font-normal text-muted-foreground">night</div>
           )}

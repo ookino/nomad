@@ -15,10 +15,13 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
 import { LoginDialog } from "./auth/login-dialog";
+import { LogoutButton } from "./logout-button";
+import { ModeToggle } from "./mode-toggle";
 import RentalDialog from "./rental-dialog";
 import { Button } from "./ui/button";
 
@@ -74,6 +77,12 @@ const UserMenu = () => {
               <CalendarDots weight="duotone" className="text-primary" />
               Reservations
             </DropdownMenuItem>
+            <DropdownMenuSeparator />
+
+            <div className="flex w-full gap-2 p-1">
+              <ModeToggle />
+              <LogoutButton />
+            </div>
           </DropdownMenuContent>
         </DropdownMenu>
       )}

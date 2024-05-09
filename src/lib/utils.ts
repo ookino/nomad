@@ -20,3 +20,18 @@ export function rgbDataURL(r: number, g: number, b: number) {
     triplet(0, r, g) + triplet(b, 255, 255)
   }/yH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==`;
 }
+
+export function formatToCurrency(
+  number: number,
+  locale: string = "en-US",
+  currency: string = "USD",
+  options: Intl.NumberFormatOptions = {}
+): string {
+  const formatter = new Intl.NumberFormat(locale, {
+    style: "currency",
+    currency,
+    ...options,
+  });
+
+  return formatter.format(number);
+}

@@ -21,8 +21,8 @@ const CategoryInput: React.FC<Props> = ({
   return (
     <div
       className={cn(
-        "gap flex flex-col rounded-md border p-4 hover:border-foreground",
-        selected && "border-foreground"
+        "gap flex cursor-pointer flex-col rounded-md border p-4 hover:border-foreground hover:bg-muted",
+        selected && "border-foreground bg-muted"
       )}
       onClick={() => onClick(label)}
     >
