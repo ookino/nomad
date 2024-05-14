@@ -12,11 +12,13 @@ import { auth } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
-  title: "Nomad BnB",
-  description: "AirBnB Clone by Okino",
+  title: "Nomad BnB - An Airbnb Clone",
+  description:
+    "Airbnb clone built with the  Next.js framework, offering a seamless listing & booking experience, secure user authentication, plus additional features. ",
   openGraph: {
-    title: "Nomad BnB",
-    description: "AirBnB Clone by Okino Works",
+    title: "Nomad BnB - An Airbnb Clone",
+    description:
+      "Airbnb clone built with the  Next.js framework, offering a seamless listing & booking experience, secure user authentication, plus additional features.",
     url: "http://nomad.okino.works",
     siteName: "Nomad BnB",
 
