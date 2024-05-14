@@ -11,6 +11,7 @@ import {
   SketchLogo,
   Tent,
   Tree,
+  TreePalm,
   Warehouse,
 } from "@phosphor-icons/react";
 
@@ -61,6 +62,16 @@ export const CATEGORIES = [
     icon: Bed,
     description:
       "Charming bed and breakfast accommodations offering personalized service and homemade breakfast.",
+  },
+  {
+    label: "Countryside",
+    icon: Mountains,
+    description: "Countryside",
+  },
+  {
+    label: "Tropical",
+    icon: TreePalm,
+    description: "Tropical",
   },
   {
     label: "Condo",

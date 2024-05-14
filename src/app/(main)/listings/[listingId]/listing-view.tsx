@@ -116,6 +116,7 @@ const ListingView: React.FC<IListingViewProps> = ({
 
             <div className=" order-first mb-10  md:order-last md:col-span-3">
               <ListingReservation
+                loading={isPending}
                 price={listing.price}
                 totalPrice={totalPrice}
                 onChangeDate={(value) => setRange(value)}

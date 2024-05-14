@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { deleteReservation } from "@/server/actions/reservation-action";
 import { Listing, Reservation, User } from "@prisma/client";
 import { toast } from "sonner";
@@ -22,7 +21,6 @@ const TripsView: React.FC<ITripsViewProps> = ({
 }) => {
   const [deletingId, setDeletingId] = useState("");
   const [isPending, startTranstion] = useTransition();
-  const router = useRouter();
 
   const cancel = useCallback(async (id: string) => {
     setDeletingId(id);
@@ -35,6 +33,8 @@ const TripsView: React.FC<ITripsViewProps> = ({
       if (error) {
         toast.error(error);
       }
+
+      setDeletingId("");
     });
   }, []);
 
@@ -45,9 +45,10 @@ const TripsView: React.FC<ITripsViewProps> = ({
         subtitle="Where you've been and where you are on your way to"
         type="page"
       />
-      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
+      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {reservations.map((reservation) => (
           <ListingCard
+            loading={isPending && reservation.id === deletingId}
             key={reservation.id}
             data={reservation.listing}
             reservation={reservation}

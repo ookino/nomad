@@ -11,6 +11,7 @@ import { formatToCurrency, rgbDataURL } from "@/lib/utils";
 import useCountries from "@/hooks/useCountries";
 
 import HeartButton from "./heart-button";
+import { Beat } from "./loaders";
 import { Button } from "./ui/button";
 import UpdateRentalDialog from "./update-rental-dialog";
 
@@ -121,7 +122,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
               className=" w-full"
               variant={"destructive"}
             >
-              <TrashSimple weight="bold" />
+              {loading ? <Beat /> : <TrashSimple weight="bold" />}
             </Button>
             {editable && <UpdateRentalDialog listing={data} />}
           </div>

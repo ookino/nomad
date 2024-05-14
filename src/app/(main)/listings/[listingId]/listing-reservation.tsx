@@ -6,6 +6,7 @@ import { formatToCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import Calendar from "@/components/calendar";
+import { Beat } from "@/components/loaders";
 
 interface IListingReservationProps {
   price: number;
@@ -15,6 +16,7 @@ interface IListingReservationProps {
   onSubmit: () => void;
   disabled: boolean;
   disabledDates: Date[];
+  loading: boolean;
 }
 
 const ListingReservation: React.FC<IListingReservationProps> = ({
@@ -25,6 +27,7 @@ const ListingReservation: React.FC<IListingReservationProps> = ({
   onSubmit,
   disabled,
   disabledDates,
+  loading,
 }) => {
   return (
     <div className="flex w-full flex-col gap-4 overflow-hidden rounded-lg border">
@@ -50,7 +53,7 @@ const ListingReservation: React.FC<IListingReservationProps> = ({
           disabled={disabled}
           onClick={onSubmit}
         >
-          Reserve
+          {loading ? <Beat /> : <>{"Reserve"}</>}
         </Button>
       </div>
 

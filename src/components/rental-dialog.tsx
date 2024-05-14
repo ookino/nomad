@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useTransition } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ import {
   House,
 } from "@phosphor-icons/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
+import BeatLoader from "react-spinners/BeatLoader";
 import { toast } from "sonner";
 
 import { cn } from "@/lib/utils";
@@ -37,6 +38,7 @@ import CategoryInput from "./category-input";
 import Counter from "./counter";
 import CountrySelect, { CountrySelectValue } from "./country-select";
 import ImageUploader from "./image-uploader";
+import { Beat } from "./loaders";
 import TextEditor from "./text-editor/text-editor";
 import { FormInput } from "./ui/custom-input";
 import { Label } from "./ui/label";
@@ -55,6 +57,7 @@ enum STEPS {
 const RentalDialog: React.FC<Props> = () => {
   const [step, setStep] = useState(STEPS.CATEGORY);
   const [open, setOpen] = useState(false);
+  const [isPending, startTransition] = useTransition();
 
   const {
     register,
@@ -117,24 +120,26 @@ const RentalDialog: React.FC<Props> = () => {
   }, [step]);
 
   const submit: SubmitHandler<FieldValues> = async (data) => {
-    if (step !== STEPS.PRICE) {
-      next();
-      return;
-    }
+    startTransition(async () => {
+      if (step !== STEPS.PRICE) {
+        next();
+        return;
+      }
 
-    const { success, error } = await createListing(data);
+      const { success, error } = await createListing(data);
 
-    if (success) {
-      toast.success(success);
-      router.refresh();
-      reset();
-      setStep(STEPS.CATEGORY);
-      setOpen(false);
-    }
+      if (success) {
+        toast.success(success);
+        router.refresh();
+        reset();
+        setStep(STEPS.CATEGORY);
+        setOpen(false);
+      }
 
-    if (error) {
-      toast.error(error);
-    }
+      if (error) {
+        toast.error(error);
+      }
+    });
   };
 
   return (
@@ -353,8 +358,14 @@ const RentalDialog: React.FC<Props> = () => {
             size={"lg"}
             onClick={handleSubmit(submit)}
           >
-            {actionLabel}
-            <CaretRight weight="bold" />
+            {isPending ? (
+              <Beat />
+            ) : (
+              <>
+                {actionLabel}
+                <CaretRight weight="bold" />
+              </>
+            )}
           </Button>
         </DialogFooter>
       </DialogContent>
