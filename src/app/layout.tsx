@@ -18,6 +18,7 @@ export const metadata: Metadata = {
     description: "AirBnB Clone by Okino Works",
     url: "http://nomad.okino.works",
     siteName: "Nomad BnB",
+
     images: [
       {
         url: "https://res.cloudinary.com/dthxhulp6/image/upload/v1714675330/nomad-og-800_hm8dmb.png",
@@ -30,6 +31,12 @@ export const metadata: Metadata = {
         width: 1800,
         height: 1600,
         alt: "Nomad OG - 1800x1600",
+      },
+      {
+        url: "https://res.cloudinary.com/okino1234/image/upload/v1715702996/nomad-og-1200_mtcacn.png",
+        width: 1200,
+        height: 627,
+        alt: "Nomad OG - 1200x627",
       },
     ],
     locale: "en_US",
