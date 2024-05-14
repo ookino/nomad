@@ -26,12 +26,12 @@ export const metadata: Metadata = {
         height: 600,
         alt: "Nomad OG - 800",
       },
-      {
-        url: "https://res.cloudinary.com/dthxhulp6/image/upload/v1714675330/nomad-og-1800_msfpde.png",
-        width: 1800,
-        height: 1600,
-        alt: "Nomad OG - 1800x1600",
-      },
+      // {
+      //   url: "https://res.cloudinary.com/dthxhulp6/image/upload/v1714675330/nomad-og-1800_msfpde.png",
+      //   width: 1800,
+      //   height: 1600,
+      //   alt: "Nomad OG - 1800x1600",
+      // },
       {
         url: "https://res.cloudinary.com/okino1234/image/upload/v1715702996/nomad-og-1200_mtcacn.png",
         width: 1200,
