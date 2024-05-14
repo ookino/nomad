@@ -75,7 +75,6 @@ export async function getReservations(params: IParams) {
 
     return reservations;
   } catch (error) {
-    console.log(error);
     throw new Error("Something went wrong, please try again later");
   }
 }

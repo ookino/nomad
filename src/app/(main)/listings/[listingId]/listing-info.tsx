@@ -39,15 +39,17 @@ const ListingInfo: React.FC<IListingInfoProps> = ({
   const coordinates = getByValue(locationValue)?.latlng;
 
   return (
-    <div className="gap col-span-4 flex flex-col gap-8">
+    <div className="gap col-span-4 flex w-full flex-col gap-8">
       <div className="flex flex-col gap-2">
         <div className="flex flex-row items-center gap-2  font-medium">
-          <div>Hosted by {user?.name}</div>
           <Avatar className="h-8 w-8">
             <AvatarImage src={user?.image || ""} />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
+          <div>Hosted by {user?.name}</div>
         </div>
+
+        <Separator className="my-4" />
 
         <div className="flex flex-row items-center gap-4 text-sm text-muted-foreground">
           <div>{guestCount} guests</div>
@@ -60,7 +62,7 @@ const ListingInfo: React.FC<IListingInfoProps> = ({
 
         <div
           dangerouslySetInnerHTML={{ __html: description }}
-          className="text-sm"
+          className="editorOutput text-sm text-secondary-foreground"
         />
         <Separator className="my-4" />
 

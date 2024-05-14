@@ -31,11 +31,11 @@ const UserMenu = () => {
 
   return (
     <div className="flex  gap-2">
-      {session.data && <RentalDialog />}
+      {session.data?.user && <RentalDialog />}
 
       {!session.data && <LoginDialog />}
 
-      {session.data && (
+      {session.data?.user && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button

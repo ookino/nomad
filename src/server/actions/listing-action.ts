@@ -8,7 +8,7 @@ import { FieldValues } from "react-hook-form";
 import { getCurrentUser } from "@/lib/auth-helpers";
 import db from "@/lib/db";
 
-export async function createListing(data: FieldValues) {
+export async function createListing(data: Partial<FieldValues>) {
   const user = await getCurrentUser();
   if (!user) {
     redirect("/");
@@ -33,9 +33,42 @@ export async function createListing(data: FieldValues) {
         //    },
       },
     });
-    return { success: "This is the success", listing };
+    return { success: "New listing created", listing };
   } catch (error) {
     return { error: "Could not create listing" };
+  }
+}
+
+export async function updateListing(data: FieldValues, id: string) {
+  const user = await getCurrentUser();
+  if (!user) {
+    redirect("/");
+  }
+  try {
+    const listing = await db.listing.update({
+      where: { id },
+      data: {
+        title: data.title,
+        description: data.description,
+        price: Number(data.price),
+        images: data.images,
+        category: data.category,
+        location: data.location.value,
+        roomCount: data.roomCount,
+        guestCount: data.guestCount,
+        bathroomCount: data.bathroomCount,
+        userId: user.id as string,
+        //    user: {
+        //      connect: {
+        //        id: user.id,
+        //      },
+        //    },
+      },
+    });
+    revalidatePath("/properties");
+    return { success: "Listing updated successful", listing };
+  } catch (error) {
+    return { error: "Could not update listing" };
   }
 }
 

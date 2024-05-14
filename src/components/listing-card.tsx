@@ -3,6 +3,7 @@
 import { useCallback, useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { PencilSimple, TrashSimple } from "@phosphor-icons/react";
 import { Listing, Reservation, User } from "@prisma/client";
 import { format } from "date-fns";
 
@@ -11,8 +12,10 @@ import useCountries from "@/hooks/useCountries";
 
 import HeartButton from "./heart-button";
 import { Button } from "./ui/button";
+import UpdateRentalDialog from "./update-rental-dialog";
 
 interface ListingCardProps {
+  loading?: boolean;
   data: Listing;
   reservation?: Reservation;
   action?: (id: string) => void;
@@ -20,9 +23,11 @@ interface ListingCardProps {
   actionId?: string;
   currentUser?: User | null;
   disabled?: boolean;
+  editable?: boolean;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
+  loading,
   data,
   reservation,
   action,
@@ -30,6 +35,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
   actionLabel,
   currentUser,
   disabled,
+  editable = false,
 }) => {
   const router = useRouter();
   const { getByValue } = useCountries();
@@ -69,12 +75,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
   }, [reservation]);
 
   return (
-    <div
-      onClick={() => router.push(`/listings/${data.id}`)}
-      className="group col-span-1 cursor-pointer"
-    >
+    <div className="group col-span-1 cursor-pointer">
       <div className="flex w-full flex-col gap-0">
-        <div className=" relative aspect-square w-full overflow-hidden rounded-lg">
+        <div
+          className=" relative aspect-square w-full overflow-hidden rounded-lg"
+          onClick={() => router.push(`/listings/${data.id}`)}
+        >
           <Image
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             priority
@@ -83,7 +89,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
             placeholder="blur"
             blurDataURL={rgbDataURL(119, 119, 119)}
             alt="listing"
-            src={data.images[0]}
+            src={data.images[0] || "/images/fallback.webp"}
             className=" h-full w-full object-cover transition group-hover:scale-110"
           />
 
@@ -91,29 +97,33 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <HeartButton listingId={data.id} currentUser={currentUser} />
           </div>
         </div>
-        <div className="mt-3 text-sm font-medium">
-          {location?.region}, {location?.label}
-        </div>
-        <div className="text-sm  text-muted-foreground">
-          {reservationDate || data.category}
-        </div>
-        <div className="mt-2 flex items-center gap-1 text-sm">
-          <div className="font-medium">{formatToCurrency(price)}</div>
-          {!reservation && (
-            <div className=" font-normal text-muted-foreground">night</div>
-          )}
+        <div onClick={() => router.push(`/listings/${data.id}`)}>
+          <div className="mt-3 text-sm font-medium">
+            {location?.region}, {location?.label}
+          </div>
+          <div className="text-sm  text-muted-foreground">
+            {reservationDate || data.category}
+          </div>
+          <div className="mt-2 flex items-center gap-1 text-sm">
+            <div className="font-medium">{formatToCurrency(price)}</div>
+            {!reservation && (
+              <div className=" font-normal text-muted-foreground">night</div>
+            )}
+          </div>
         </div>
 
         {action && actionLabel && (
-          <div className="mt-4 w-full">
+          <div className="mt-4 flex w-full gap-2">
             <Button
               size={"sm"}
-              disabled={disabled}
+              disabled={disabled || loading}
               onClick={handelCancel}
-              className="w-full"
+              className=" w-full"
+              variant={"destructive"}
             >
-              {actionLabel}
+              <TrashSimple weight="bold" />
             </Button>
+            {editable && <UpdateRentalDialog listing={data} />}
           </div>
         )}
       </div>

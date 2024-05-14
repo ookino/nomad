@@ -67,14 +67,12 @@
   .leaflet-top {
     z-index: 0 !important;
   }
-
   .my-config {
     --darkmode: 1;
     --h-accent: 21;
     --s-accent: 90%;
     --l-accent: 48%;
   }
-
   .wrapper {
     padding: 2rem 3rem;
   }
@@ -83,10 +81,17 @@
     font-size: 1rem;
     font-weight: 500;
   }
-
   .editor {
     margin-top: 1rem;
     height: 500px;
+  }
+  .editorOutput p span,
+  .editorOutput p {
+    @apply !text-foreground;
+    @apply !font-light leading-normal !tracking-normal;
+  }
+  .editorOutput p a {
+    @apply !text-orange-500;
   }
 }
 
@@ -100,12 +105,26 @@
   background: var(--background) !important;
 }
 
+.rdrDays .rdrDayDisabled,
 .rdrDayDisabled {
+  background-color: transparent !important;
+}
+
+.rdrDayDisabled .rdrDayNumber span {
+  color: #ea580c !important;
 }
 
 .rdrDayNumber span {
+  color: #737373 !important;
 }
 
+.ql-toolbar.ql-snow {
+  @apply rounded-tl-lg rounded-tr-lg !border !border-muted;
+}
+
+.ql-container.ql-snow {
+  @apply rounded-bl-lg rounded-br-lg !border !border-muted;
+}
 /* .rdrEndEdge {
   border-top-right-radius: 0.8em !important;
   border-bottom-right-radius: 0.8em !important;

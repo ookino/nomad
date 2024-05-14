@@ -6,7 +6,12 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { CATEGORIES } from "@/constants";
 import { createListing } from "@/server/actions/listing-action";
-import { CaretLeft, HourglassMedium, House } from "@phosphor-icons/react";
+import {
+  CaretLeft,
+  CaretRight,
+  HourglassMedium,
+  House,
+} from "@phosphor-icons/react";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
@@ -297,7 +302,7 @@ const RentalDialog: React.FC<Props> = () => {
                 required
               />
 
-              <div>
+              <div className="flex w-full flex-col gap-2">
                 <Label>Description</Label>
                 <TextEditor
                   value={description}
@@ -331,7 +336,7 @@ const RentalDialog: React.FC<Props> = () => {
           </div>
         )}
 
-        <DialogFooter>
+        <DialogFooter className="flex flex-row gap-2">
           {step !== STEPS.CATEGORY && (
             <Button
               className=""
@@ -343,8 +348,13 @@ const RentalDialog: React.FC<Props> = () => {
             </Button>
           )}
 
-          <Button className="w-full" size={"lg"} onClick={handleSubmit(submit)}>
+          <Button
+            className="w-full gap-4"
+            size={"lg"}
+            onClick={handleSubmit(submit)}
+          >
             {actionLabel}
+            <CaretRight weight="bold" />
           </Button>
         </DialogFooter>
       </DialogContent>

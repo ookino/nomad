@@ -13,7 +13,7 @@ const FavouritesPage = async () => {
     return (
       <EmptyState
         title="Unauthorized, Please Login"
-        subtitle={"Login"}
+        subtitle={""}
         actionDialog={<LoginDialog />}
       />
     );

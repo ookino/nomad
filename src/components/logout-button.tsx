@@ -1,13 +1,17 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { logout } from "@/server/actions/logout-action";
 import { SignOut } from "@phosphor-icons/react";
 
 import { Button } from "./ui/button";
 
 export function LogoutButton() {
-  function onClick() {
-    logout();
+  const router = useRouter();
+  const path = usePathname();
+
+  async function onClick() {
+    await logout(path);
   }
 
   return (

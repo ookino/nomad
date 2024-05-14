@@ -1,6 +1,6 @@
 "use client";
 
-import { Range } from "react-date-range";
+import { DateRange } from "react-day-picker";
 
 import { formatToCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -9,9 +9,9 @@ import Calendar from "@/components/calendar";
 
 interface IListingReservationProps {
   price: number;
-  dateRange: Range;
+  dateRange: DateRange;
   totalPrice: number;
-  onChangeDate: (value: Range) => void;
+  onChangeDate: (value: DateRange) => void;
   onSubmit: () => void;
   disabled: boolean;
   disabledDates: Date[];
@@ -38,7 +38,7 @@ const ListingReservation: React.FC<IListingReservationProps> = ({
       <Calendar
         value={dateRange}
         disabledDates={disabledDates}
-        onChange={(value) => onChangeDate(value.selection)}
+        onChange={(value) => onChangeDate(value)}
       />
 
       <Separator />

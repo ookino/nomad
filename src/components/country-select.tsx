@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 import useCountries from "@/hooks/useCountries";
 
 interface CountrySelectProps {
-  value?: CountrySelectValue;
+  value?: string;
   onChange: (value: CountrySelectValue) => void;
 }
 
@@ -22,7 +22,7 @@ export type CountrySelectValue = {
 
 const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
   const { setTheme, theme } = useTheme();
-  const { getAll } = useCountries();
+  const { getAll, getByValue } = useCountries();
 
   const customStyles = {
     option: (defaultStyles: any, state: { isSelected: any }) => ({
@@ -48,14 +48,19 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
     }),
     singleValue: (defaultStyles: any) => ({ ...defaultStyles, color: "#fff" }),
   };
+
+  const prevValue = getByValue(value as string);
+
   return (
     <div>
       <Select
         placeholder="Anywhere in the world"
         isClearable
         options={getAll()}
-        value={value}
-        onChange={(value) => onChange(value as CountrySelectValue)}
+        value={prevValue}
+        onChange={(value) => {
+          onChange(value as CountrySelectValue);
+        }}
         formatOptionLabel={(option: CountrySelectValue) => (
           <div className="items-centre flex flex-row gap-3">
             <div>{option.flag}</div>

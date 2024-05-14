@@ -12,7 +12,7 @@ import { CATEGORIES } from "@/constants";
 import { createReservation } from "@/server/actions/reservation-action";
 import { Listing, Reservation, User } from "@prisma/client";
 import { differenceInCalendarDays, eachDayOfInterval } from "date-fns";
-import { Range } from "react-date-range";
+import { DateRange } from "react-day-picker";
 import { toast } from "sonner";
 
 import Container from "@/components/container";
@@ -28,9 +28,9 @@ interface IListingViewProps {
 }
 
 const initialDateRange = {
-  startDate: new Date(),
-  endDate: new Date(),
-  key: "selection",
+  from: new Date(),
+  to: new Date(),
+  // key: "selection",
 };
 const ListingView: React.FC<IListingViewProps> = ({
   listing,
@@ -40,7 +40,8 @@ const ListingView: React.FC<IListingViewProps> = ({
   const router = useRouter();
   const [isPending, startTransition] = useTransition();
   const [totalPrice, setTotalPrice] = useState(listing.price);
-  const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+  // const [dateRange, setDateRange] = useState<Range>(initialDateRange);
+  const [range, setRange] = useState<DateRange>(initialDateRange);
 
   const disabledDates = useMemo(() => {
     let dates: Date[] = [];
@@ -61,12 +62,12 @@ const ListingView: React.FC<IListingViewProps> = ({
       const { success, error } = await createReservation({
         listingId: listing.id,
         totalPrice,
-        startDate: dateRange.startDate,
-        endDate: dateRange.endDate,
+        startDate: range?.from,
+        endDate: range?.to,
       });
       if (success) {
         toast.success(success);
-        setDateRange(initialDateRange);
+        setRange(initialDateRange);
         router.push("/trips");
         router.refresh();
       }
@@ -74,21 +75,18 @@ const ListingView: React.FC<IListingViewProps> = ({
         toast.error(error || "Error creating reservation");
       }
     });
-  }, [dateRange.endDate, dateRange.startDate, router, totalPrice, listing.id]);
+  }, [range?.to, range?.from, router, totalPrice, listing.id]);
 
   useEffect(() => {
-    if (dateRange.startDate && dateRange.endDate) {
-      const dayCount = differenceInCalendarDays(
-        dateRange.endDate,
-        dateRange.startDate
-      );
+    if (range?.to && range.from) {
+      const dayCount = differenceInCalendarDays(range.to, range.from);
       if (dayCount && listing.price) {
         setTotalPrice(dayCount * listing.price);
       } else {
         setTotalPrice(listing.price);
       }
     }
-  }, [dateRange, listing.price]);
+  }, [range, listing.price]);
 
   const category = useMemo(() => {
     return CATEGORIES.find((item) => item.label === listing.category);
@@ -120,8 +118,8 @@ const ListingView: React.FC<IListingViewProps> = ({
               <ListingReservation
                 price={listing.price}
                 totalPrice={totalPrice}
-                onChangeDate={(value) => setDateRange(value)}
-                dateRange={dateRange}
+                onChangeDate={(value) => setRange(value)}
+                dateRange={range}
                 onSubmit={handleCreateReservation}
                 disabled={isPending}
                 disabledDates={disabledDates}

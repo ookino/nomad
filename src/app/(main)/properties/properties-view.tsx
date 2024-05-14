@@ -1,7 +1,6 @@
 "use client";
 
 import { useCallback, useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { deleteListing } from "@/server/actions/listing-action";
 import { Listing, User } from "@prisma/client";
 import { toast } from "sonner";
@@ -41,6 +40,7 @@ const PropertiesView: React.FC<IPropertiesViewProps> = ({
       <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
         {listings.map((listing) => (
           <ListingCard
+            loading={isPending}
             key={listing.id}
             data={listing}
             actionId={listing.id}
@@ -48,6 +48,7 @@ const PropertiesView: React.FC<IPropertiesViewProps> = ({
             disabled={deletingId === listing.id}
             actionLabel={"Remove property"}
             currentUser={currentUser}
+            editable
           />
         ))}
       </div>

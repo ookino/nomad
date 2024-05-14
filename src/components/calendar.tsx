@@ -1,6 +1,6 @@
 "use client";
 
-import { DateRange, Range, RangeKeyDict } from "react-date-range";
+import { DateRange, Matcher } from "react-day-picker";
 
 import { Calendar as SCalender } from "@/components/ui/calendar";
 
@@ -8,36 +8,29 @@ import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
 
 interface ICalenderProps {
-  value: any;
-  onChange: (value: any) => void;
-  disabledDates?: Date[];
+  value: DateRange;
+  onChange: (value: DateRange) => void;
+  disabledDates?: Matcher[];
 }
 const Calendar: React.FC<ICalenderProps> = ({
   value,
   onChange,
-  disabledDates,
+  disabledDates = [],
 }) => {
-  return (
-    <div>
-      <DateRange
-        rangeColors={["#ea580c"]}
-        ranges={[value]}
-        date={new Date()}
-        onChange={onChange}
-        direction="vertical"
-        showDateDisplay={false}
-        minDate={new Date()}
-        disabledDates={disabledDates}
-      />
+  const pastDays: Matcher = { before: new Date() };
 
-      {/* <SCalender
+  const disabledDays = [pastDays, ...(disabledDates as Matcher[])];
+  return (
+    <div className="w-full">
+      <SCalender
         className="w-full"
         mode="range"
-        numberOfMonths={1}
-        onSelect={onChange}
-        selected={value || new Date()}
-        disabled={disabledDates}
-      /> */}
+        selected={value}
+        disabled={disabledDays}
+        onSelect={(dates) => {
+          return onChange((dates as DateRange) || []);
+        }}
+      />
     </div>
   );
 };

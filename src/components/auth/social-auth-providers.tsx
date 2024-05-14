@@ -28,6 +28,7 @@ export function SocialAuthenticationProvider() {
         className="w-full gap-2 text-xs"
         variant={"outline"}
         onClick={() => onClick("github")}
+        disabled
       >
         <GithubIcon className="h-4 w-4" />
       </Button>
@@ -37,6 +38,7 @@ export function SocialAuthenticationProvider() {
         className="w-full gap-2 text-xs"
         variant={"outline"}
         onClick={() => onClick("google")}
+        disabled
       >
         <FacebookIcon className="h-4 w-4" />
       </Button>
