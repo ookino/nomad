@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/theme";
+import { Analytics } from "@vercel/analytics/react";
 
 import { poppins } from "../fonts";
 
@@ -54,6 +55,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={poppins.className}>
+        <Analytics />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -61,6 +63,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <Toaster richColors />
+
           <SessionProvider session={session}>{children}</SessionProvider>
         </ThemeProvider>
       </body>
