@@ -39,28 +39,30 @@ const TripsView: React.FC<ITripsViewProps> = ({
   }, []);
 
   return (
-    <Container>
-      <Heading
-        title="Trips"
-        subtitle="Where you've been and where you are on your way to"
-        type="page"
-      />
-      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {reservations.map((reservation) => (
-          <ListingCard
-            loading={isPending && reservation.id === deletingId}
-            key={reservation.id}
-            data={reservation.listing}
-            reservation={reservation}
-            actionId={reservation.id}
-            action={cancel}
-            disabled={deletingId === reservation.id}
-            actionLabel={"Cancel reservation"}
-            currentUser={currentUser}
-          />
-        ))}
-      </div>
-    </Container>
+    <div className="mt-4">
+      <Container>
+        <Heading
+          title="Trips"
+          subtitle="Where you've been and where you are on your way to"
+          type="page"
+        />
+        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {reservations.map((reservation) => (
+            <ListingCard
+              loading={isPending && reservation.id === deletingId}
+              key={reservation.id}
+              data={reservation.listing}
+              reservation={reservation}
+              actionId={reservation.id}
+              action={cancel}
+              disabled={deletingId === reservation.id}
+              actionLabel={"Cancel reservation"}
+              currentUser={currentUser}
+            />
+          ))}
+        </div>
+      </Container>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ export function PropagateLoader() {
   return <Propagate color="#ea580c" />;
 }
 
-export function Beat() {
+export function Beat({ alt }: { alt?: boolean }) {
   const { theme } = useTheme();
 
   const light = theme === "light";
@@ -18,7 +18,17 @@ export function Beat() {
   return (
     <BeatLoader
       size={10}
-      color={light ? "#f4f4f5" : dark ? "#0a0a0a" : "#71717a"}
+      color={
+        light
+          ? alt
+            ? "#0a0a0a"
+            : "#f5f5f5"
+          : dark
+            ? alt
+              ? "#f5f5f5"
+              : "#0a0a0a"
+            : "#71717a"
+      }
     />
   );
 }

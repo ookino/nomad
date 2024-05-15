@@ -1,7 +1,9 @@
+import { Suspense } from "react";
 import { getListings } from "@/server/actions/listing-action";
 
 import { getCurrentUser } from "@/lib/auth-helpers";
 import EmptyState from "@/components/empty-state";
+import ListingsSkeleton from "@/components/listings-skeleton";
 import RentalDialog from "@/components/rental-dialog";
 
 import PropertiesView from "./properties-view";
@@ -29,7 +31,11 @@ const PropertiesPage = async () => {
     );
   }
 
-  return <PropertiesView listings={listings} currentUser={currentUser} />;
+  return (
+    <Suspense fallback={<ListingsSkeleton />}>
+      <PropertiesView listings={listings} currentUser={currentUser} />
+    </Suspense>
+  );
 };
 
 export default PropertiesPage;

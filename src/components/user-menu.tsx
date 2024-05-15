@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import {
   CalendarDots,
@@ -55,27 +56,30 @@ const UserMenu = () => {
               className="gap-2 py-2 text-xs"
               onClick={() => router.push("/trips")}
             >
-              <Path weight="duotone" className="gap-2 text-primary" /> Trips
+              <Link href={"/trips"} className="flex items-center gap-2">
+                <Path weight="duotone" className="gap-2 text-primary" /> Trips
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              className="gap-2 py-2 text-xs"
-              onClick={() => router.push("/favourites")}
-            >
-              <Heart weight="duotone" className=" text-primary " /> Favourites
+            <DropdownMenuItem className="gap-2 py-2 text-xs">
+              <Link href={"/favourites"} className="flex items-center gap-2">
+                <Heart weight="duotone" className=" text-primary " /> Favourites
+              </Link>
             </DropdownMenuItem>
-            <DropdownMenuItem
-              className="gap-2 py-2 text-xs"
-              onClick={() => router.push("/properties")}
-            >
-              <HouseLine weight="duotone" className="text-primary" /> Properties
+            <DropdownMenuItem className="gap-2 py-2 text-xs">
+              <Link href={"/properties"} className="flex items-center gap-2">
+                <HouseLine weight="duotone" className="text-primary" />{" "}
+                Properties
+              </Link>
             </DropdownMenuItem>
 
             <DropdownMenuItem
               className="gap-2 py-2 text-xs"
               onClick={() => router.push("/reservations")}
             >
-              <CalendarDots weight="duotone" className="text-primary" />
-              Reservations
+              <Link href={"/reservations"} className="flex items-center gap-2">
+                <CalendarDots weight="duotone" className="text-primary" />
+                Reservations
+              </Link>
             </DropdownMenuItem>
             <DropdownMenuSeparator />
 

@@ -37,28 +37,30 @@ const ReservationsView: React.FC<IReservationsViewProps> = ({
   }, []);
 
   return (
-    <Container>
-      <Heading
-        title="Reservations"
-        subtitle="Reservations on your properties"
-        type="page"
-      />
-      <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {reservations.map((reservation) => (
-          <ListingCard
-            loading={isPending}
-            key={reservation.id}
-            data={reservation.listing}
-            reservation={reservation}
-            disabled={deletingId === reservation.id}
-            currentUser={currentUser}
-            actionId={reservation.id}
-            action={cancel}
-            actionLabel={"Cancel guest reservation"}
-          />
-        ))}
-      </div>
-    </Container>
+    <div className="mt-4">
+      <Container>
+        <Heading
+          title="Reservations"
+          subtitle="Reservations on your properties"
+          type="page"
+        />
+        <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {reservations.map((reservation) => (
+            <ListingCard
+              loading={isPending}
+              key={reservation.id}
+              data={reservation.listing}
+              reservation={reservation}
+              disabled={deletingId === reservation.id}
+              currentUser={currentUser}
+              actionId={reservation.id}
+              action={cancel}
+              actionLabel={"Cancel guest reservation"}
+            />
+          ))}
+        </div>
+      </Container>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@ import UserMenu from "./user-menu";
 const Navbar: React.FC = () => {
   return (
     <div className=" fixed z-50 w-full bg-background">
-      <div className="space-y-4 border-b py-4 md:space-y-8">
+      <div className="space-y-4 border-b pb-4 pt-8 md:space-y-8">
         <Container>
           <div className="hidden w-full flex-row items-center justify-between md:flex md:gap-0  ">
             <div className="flex flex-1  justify-start">

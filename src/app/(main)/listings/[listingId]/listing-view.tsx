@@ -93,7 +93,7 @@ const ListingView: React.FC<IListingViewProps> = ({
   }, [listing.category]);
   return (
     <Container>
-      <div className="mx-auto max-w-screen-lg">
+      <div className="mx-auto mt-8 max-w-screen-lg">
         <div className="flex flex-col gap-6">
           <ListingHeader
             title={listing.title}

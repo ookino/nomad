@@ -1,4 +1,4 @@
-![NOMAD BNB Logo](https://res.cloudinary.com/dthxhulp6/image/upload/v1714687868/nomad-og-1800_copy_e2disu.png)
+![NOMAD BNB Logo](https://res.cloudinary.com/dthxhulp6/image/upload/v1715731984/OG_1200_nomad_dc4pe3.png)
 
 ## NOMAD BNB
 

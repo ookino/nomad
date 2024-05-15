@@ -27,9 +27,10 @@ const Heading: React.FC<Props> = ({
         center ? "items-center" : "items-start"
       )}
     >
-      {page && <h1 className="text-xl font-medium ">{title}</h1>}
+      {page && <h1 className="text-2xl font-medium ">{title}</h1>}
       {card && <h4 className="text-sm font-medium">{title}</h4>}
-      <h6 className="text-xs  text-muted-foreground">{subtitle}</h6>
+      {page && <h6 className="text-sm  text-muted-foreground">{subtitle}</h6>}
+      {card && <h6 className="text-xs  text-muted-foreground">{subtitle}</h6>}
     </div>
   );
 };

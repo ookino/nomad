@@ -1,7 +1,10 @@
+import { Suspense } from "react";
 import { getReservations } from "@/server/actions/reservation-action";
 
 import { getCurrentUser } from "@/lib/auth-helpers";
+import { Skeleton } from "@/components/ui/skeleton";
 import EmptyState from "@/components/empty-state";
+import ListingsSkeleton from "@/components/listings-skeleton";
 
 import TripsView from "./trips-view";
 
@@ -27,7 +30,11 @@ const TripsPage = async () => {
     );
   }
 
-  return <TripsView reservations={reservations} currentUser={currentUser} />;
+  return (
+    <Suspense fallback={<ListingsSkeleton />}>
+      <TripsView reservations={reservations} currentUser={currentUser} />
+    </Suspense>
+  );
 };
 
 export default TripsPage;

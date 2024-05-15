@@ -1,9 +1,11 @@
+import { Suspense } from "react";
 import { getListingsByUserId } from "@/server/actions/listing-action";
 import { getReservations } from "@/server/actions/reservation-action";
 
 import { getCurrentUser } from "@/lib/auth-helpers";
 import { LoginDialog } from "@/components/auth/login-dialog";
 import EmptyState from "@/components/empty-state";
+import ListingsSkeleton from "@/components/listings-skeleton";
 import RentalDialog from "@/components/rental-dialog";
 
 import ReservationsView from "./reservation-view";
@@ -47,7 +49,9 @@ const ReservationPage = async () => {
   }
 
   return (
-    <ReservationsView reservations={reservations} currentUser={currentUser} />
+    <Suspense fallback={<ListingsSkeleton />}>
+      <ReservationsView reservations={reservations} currentUser={currentUser} />
+    </Suspense>
   );
 };
 

@@ -10,6 +10,7 @@ import { SessionProvider } from "next-auth/react";
 
 import { auth } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
+import { PageLoadingIndicator } from "@/components/page-loader";
 
 export const metadata: Metadata = {
   title: "Nomad BnB - An Airbnb Clone",
@@ -64,6 +65,7 @@ export default async function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <PageLoadingIndicator />
           <Toaster richColors />
 
           <SessionProvider session={session}>{children}</SessionProvider>
