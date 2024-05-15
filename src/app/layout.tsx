@@ -24,6 +24,12 @@ export const metadata: Metadata = {
 
     images: [
       {
+        url: "https://res.cloudinary.com/dthxhulp6/image/upload/v1715731984/OG_1200_nomad_dc4pe3.png",
+        width: 1200,
+        height: 630,
+        alt: "Nomad OG - 1200x630",
+      },
+      {
         url: "https://res.cloudinary.com/dthxhulp6/image/upload/v1714675330/nomad-og-800_hm8dmb.png",
         width: 800,
         height: 600,
@@ -35,12 +41,6 @@ export const metadata: Metadata = {
       //   height: 1600,
       //   alt: "Nomad OG - 1800x1600",
       // },
-      {
-        url: "https://res.cloudinary.com/okino1234/image/upload/v1715702996/nomad-og-1200_mtcacn.png",
-        width: 1200,
-        height: 627,
-        alt: "Nomad OG - 1200x627",
-      },
     ],
     locale: "en_US",
     type: "website",
