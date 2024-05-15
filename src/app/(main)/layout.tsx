@@ -4,6 +4,7 @@ import { GithubLogo } from "@phosphor-icons/react/dist/ssr";
 import { Separator } from "@/components/ui/separator";
 import Container from "@/components/container";
 import { WrksIcon } from "@/components/icons/wrks";
+import { ModeToggle } from "@/components/mode-toggle";
 import Navbar from "@/components/navbar";
 
 export default async function MainLayout({
@@ -26,6 +27,7 @@ export default async function MainLayout({
             </div>
 
             <div className="flex items-center gap-4">
+              <ModeToggle />
               <Link href={"https://github.com/ookino/nomad"}>
                 <GithubLogo className="h-6" weight="fill" />
               </Link>
