@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo } from "react";
+import { HTMLProps, useCallback, useMemo } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { PencilSimple, TrashSimple } from "@phosphor-icons/react";
@@ -25,6 +25,7 @@ interface ListingCardProps {
   currentUser?: User | null;
   disabled?: boolean;
   editable?: boolean;
+  className?: HTMLProps<HTMLElement>["className"];
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({

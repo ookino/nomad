@@ -118,6 +118,10 @@
   color: #737373 !important;
 }
 
+.quill {
+  @apply !w-full;
+}
+
 .ql-toolbar.ql-snow {
   @apply rounded-tl-lg rounded-tr-lg !border !border-muted;
 }
@@ -125,6 +129,7 @@
 .ql-container.ql-snow {
   @apply rounded-bl-lg rounded-br-lg !border !border-muted;
 }
+
 /* .rdrEndEdge {
   border-top-right-radius: 0.8em !important;
   border-bottom-right-radius: 0.8em !important;
